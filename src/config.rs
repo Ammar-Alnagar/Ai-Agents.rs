@@ -5,6 +5,7 @@ pub struct AgentConfig {
     pub learning_capacity: usize,
 }
 
+
 impl Default for AgentConfig {
     fn default() -> Self {
         AgentConfig {
