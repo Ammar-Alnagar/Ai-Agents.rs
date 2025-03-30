@@ -8,6 +8,7 @@
 
 ## Overview
 
+
 This project implements a **modular multi-agent system** in Rust. It demonstrates how agents can communicate, interact, and execute behaviors in a simulated environment. The system is designed to be extensible, allowing developers to add new agent types, behaviors, and simulation logic with minimal changes to the core architecture.
 
 Key features include:
