@@ -13,6 +13,7 @@ This project implements a **modular multi-agent system** in Rust. It demonstrate
 
 
 
+
 Key features include:
 - **Message-passing communication**: Agents exchange messages via a centralized message queue.
 - **Tick-based simulation**: The environment processes agent actions and messages in discrete time steps.
