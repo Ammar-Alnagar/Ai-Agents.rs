@@ -1,14 +1,21 @@
-use crate::behaviors::AgentBehavior;
+use crate::agents::basic_agent;
+use crate::agents::learning_agent;
+use crate::agents::researcher_agent;
+use crate::agents::writer_agent;
+use crate::behaviors::behavior_trait::AgentBehavior;
+use crate::environment::Environment;
 use crate::message::Message;
 
 pub enum AgentType {
     Basic,
     Learning,
+    Researcher,
+    Writer,
 }
 
 pub struct Agent {
-    id: usize,
-    behavior: Box<dyn AgentBehavior>,
+    pub id: Option<usize>,
+    pub behavior: Box<dyn AgentBehavior>,
 }
 
 impl Agent {
@@ -16,23 +23,20 @@ impl Agent {
         let behavior: Box<dyn AgentBehavior> = match agent_type {
             AgentType::Basic => Box::new(basic_agent::BasicAgent::default()),
             AgentType::Learning => Box::new(learning_agent::LearningAgent::default()),
+            AgentType::Researcher => Box::new(researcher_agent::ResearcherAgent::default()),
+            AgentType::Writer => Box::new(writer_agent::WriterAgent::default()),
         };
-        
-        Agent {
-            id: 0, // Will be set by environment
-            behavior,
-        }
+
+        Agent { id: None, behavior }
     }
 
-    pub fn set_id(&mut self, id: usize) {
-        self.id = id;
-    }
-
-    pub fn run(&mut self, env: &mut Environment) {
-        self.behavior.run(env)
+    pub fn run(&mut self, env: &mut Environment) -> Result<(), anyhow::Error> {
+        let id = self.id.clone();
+        self.behavior.run(id, env)
     }
 
     pub fn handle_message(&mut self, message: &Message) {
-        self.behavior.handle_message(message)
+        let id = self.id.clone();
+        self.behavior.handle_message(id, message)
     }
 }
