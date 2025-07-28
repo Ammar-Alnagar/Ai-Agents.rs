@@ -51,6 +51,27 @@ Key features include:
 
 ---
 
+## Architecture
+
+The system is designed with a modular architecture that separates concerns and promotes extensibility. The main components are:
+
+- **Environment**: The core of the simulation, responsible for managing agents, processing messages, and executing ticks.
+- **Agents**: Autonomous entities that can communicate, make decisions, and execute behaviors.
+- **Behaviors**: The logic that defines how an agent acts and reacts to messages.
+- **Message Queue**: A centralized queue for inter-agent communication.
+- **TUI**: A terminal user interface for visualizing the simulation.
+
+Here is a diagram of the architecture:
+
+```mermaid
+graph TD;
+    A[Environment] -->|Manages| B(Agents);
+    B -->|Executes| C(Behaviors);
+    C -->|Sends| D{Message Queue};
+    D -->|Delivers| B;
+    A -->|Updates| E[TUI];
+```
+
 ## Project Structure
 
 The project is organized into modular components for clarity and maintainability:
@@ -59,19 +80,25 @@ The project is organized into modular components for clarity and maintainability
 ai-agents/
 ├── Cargo.toml          # Project metadata and dependencies
 ├── README.md           # This documentation
+├── config.json         # Configuration file for agents and providers
 └── src/
     ├── main.rs         # Entry point for the application
     ├── agents/         # Agent implementations
     │   ├── mod.rs      # Module declaration for agents
     │   ├── agent.rs    # Base agent implementation
     │   ├── basic_agent.rs  # Basic agent behavior
-    │   └── learning_agent.rs # Learning agent behavior
+    │   ├── learning_agent.rs # Learning agent behavior
+    │   ├── researcher_agent.rs # Researcher agent behavior
+    │   └── writer_agent.rs # Writer agent behavior
     ├── behaviors/      # Behavior traits and implementations
     │   ├── mod.rs      # Module declaration for behaviors
     │   └── behavior_trait.rs # Core behavior trait
+    ├── tools/          # Tools for agents
+    │   ├── mod.rs      # Module declaration for tools
+    │   └── web_search.rs # Web search tool
     ├── environment.rs  # Environment management and simulation loop
     ├── message.rs      # Message struct and utilities
-    └── config.rs       # Optional configuration system
+    └── config.rs       # Configuration system
 ```
 
 ---

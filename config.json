@@ -1,0 +1,15 @@
+{
+  "agents": [
+    {
+      "name": "researcher_agent",
+      "tools": ["web_search"]
+    },
+    {
+      "name": "writer_agent",
+      "tools": []
+    }
+  ],
+  "providers": {
+    "openai_api_key": "YOUR_API_KEY_HERE"
+  }
+}

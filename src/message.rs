@@ -1,15 +1,15 @@
 #[derive(Clone)]
 pub struct Message {
-    pub sender: usize,
-    pub receiver: usize,
+    pub sender_id: usize,
+    pub receiver_id: usize,
     pub content: String,
 }
 
 impl Message {
-    pub fn new(sender: usize, receiver: usize, content: String) -> Self {
+    pub fn new(sender_id: usize, receiver_id: usize, content: String) -> Self {
         Message {
-            sender,
-            receiver,
+            sender_id,
+            receiver_id,
             content,
         }
     }
